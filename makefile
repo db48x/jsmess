@@ -135,6 +135,10 @@ EMCC_FLAGS += -s EXPORTED_FUNCTIONS="['_main', '_malloc', \
 '__ZN10ui_manager12set_show_fpsEb', '__ZNK10ui_manager8show_fpsEv', \
 '__ZN13sound_manager4muteEbh', 'SDL_PauseAudio']"
 
+ifdef USE_WORKER
+  EMCC_FLAGS += --proxy-to-worker -s "PROXY_TO_WORKER_FILENAME='messloader'"
+endif
+
 # Flags shared between the native tools build and emscripten build of MESS.
 
 SHARED_MESS_FLAGS := OSD=sdl       # Set the onscreen display to use SDL.
@@ -243,6 +247,7 @@ $(JS_OBJ_DIR)/index.html: $(JS_OBJ_DIR) $(TEMPLATE_FILES) $(BIOS_FILES) $(GAME_F
 	@rm $(JS_OBJ_DIR)/post.js
 	@sed -e 's/BIOS_FILES/$(BIOS)/g' \
 	     -e 's/GAME_FILE/$(GAME)/g' \
+	     -e 's/SYSTEM/$(SYSTEM)/g' \
 	     -e 's/MESS_SRC/$(MESS_EXE)$(DEBUG_NAME).js/g' \
 	     -e 's/MESS_ARGS/$(MESS_ARGS)/g' \
 		 $(TEMPLATE_DIR)/messloader.js > $(JS_OBJ_DIR)/messloader.js
