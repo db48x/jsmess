@@ -1,7 +1,4 @@
-if(!window.console){ window.console = {log: function(){} }; }
 var JSMESS = JSMESS || {};
-JSMESS.running = false;
-JSMESS.ready(function() { console.log("JSMESS is now running"); });
 JSMESS.JSMESS_VERSION = "JSMESS_JSMESS_VERSION";
 JSMESS.MESS_BUILD_VERSION = "JSMESS_MESS_BUILD_VERSION";
 JSMESS.EMCC_VERSION = "JSMESS_EMCC_VERSION";
